@@ -20,6 +20,7 @@ Output: [1,2]
 
 using namespace std;
 
+// NAIVE APPROACH, TIME COMPLEXITY: O(n^2)
 vector<int> twoSumIterative(vector<int>& nums, int target)
 {
     int i,j;
@@ -43,22 +44,98 @@ vector<int> twoSumIterative(vector<int>& nums, int target)
     return ans;
 }
 
-// twoSumRecursive(vector<int>& nums, int target)
-// use sorting (O of n) and then two pointers to iterate through the list
-// that will be 2O(n) which is less than O(n^2)
+// BETTER APPROACH, TIME COMPLEXITY: O(n*log(n)+n)
+vector<int> twoSumTwoCounter(vector<int>& nums, int target)
+{
+    // this method will work on sorted vector so sort it first
 
+    sort(nums.begin(),nums.end());
+
+    int i,j;
+    i=0;
+    j=nums.size()-1;
+
+    vector<int> ans;
+
+    while(i<j) // no equality allowed as then the common element will be repeated, which is not allowed
+    {
+        if(nums[i]+nums[j]==target)
+        {
+            ans.push_back(i);
+            ans.push_back(j);
+
+            return ans;
+        }
+
+        else if(nums[i]+nums[j]>target)
+            --j;
+
+        else if(nums[i]+nums[j]<target)
+            ++i;
+    }
+
+    return ans;
+}
+
+// SIMPLE BINARY SEARCH
+int binarySearchRecursive(vector<int> vec, int key, int low, int high)
+{
+    int mid=(low+high)/2;
+
+    if(low>high)
+        return -1;
+
+    if(key==vec[mid])
+        return mid;
+
+    if(key>vec[mid])
+        return binarySearchRecursive(vec,key,mid+1,high);
+
+    if(key<vec[mid])
+        return binarySearchRecursive(vec,key,low,mid-1);
+
+    return -1;
+}
+
+// ANOTHER BETTER APPROACH, TIME COMPLEXITY: O(n*log(n))
+vector<int> twoSumBinarySearch(vector<int>& nums, int target)
+{
+    int i;
+
+    vector<int> ans;
+
+    for(i=0;i<nums.size();i++)
+    {
+        int pos=binarySearchRecursive(nums,target-nums[i],0,nums.size()-1);
+
+        if(pos!=-1)
+        {
+            ans.push_back(i);
+            ans.push_back(pos);
+
+            return ans;
+        }
+    }
+
+    return ans;
+}
 
 int main()
 {
     vector<int> vec;
 
-    vec.push_back(3);
-    vec.push_back(2);
+    vec.push_back(-8);
+    vec.push_back(1);
     vec.push_back(4);
+    vec.push_back(6);
+    vec.push_back(10);
+    vec.push_back(45);
 
-    int target=6;
+    int target=16;
 
     cout<<twoSumIterative(vec,target)[0]<<"\t"<<twoSumIterative(vec,target)[1]<<endl;
+    cout<<twoSumTwoCounter(vec,target)[0]<<"\t"<<twoSumTwoCounter(vec,target)[1]<<endl;
+    cout<<twoSumBinarySearch(vec,target)[0]<<"\t"<<twoSumBinarySearch(vec,target)[1]<<endl;
 
     cout<<endl;
     return 0;
