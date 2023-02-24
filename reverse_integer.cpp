@@ -76,6 +76,7 @@ int reverseInteger(int num)
 int main()
 {
     int num=-2147483412;
+    // you can only input values that lie in the range: [INT_MIN, INT_MAX]
 
     cout<<"Original number: "<<num<<endl;
     cout<<"Reversed number: "<<reverseInteger(num)<<endl;
