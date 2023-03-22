@@ -41,6 +41,8 @@ s contains only the characters ('I', 'V', 'X', 'L', 'C', 'D', 'M').
 It is guaranteed that s is a valid roman numeral in the range [1, 3999].
 */
 
+// APPROACH 1
+// Longer runtime
 int countStringLengthManually(string str)
     {
         int i, cnt=0;
@@ -160,3 +162,68 @@ int countStringLengthManually(string str)
 
     return sum;
     }
+
+// APPROACH 2
+// Shorter runtime
+int val(char ch)
+    {
+        switch(ch)
+        {
+            case 'I':
+            return 1;
+
+            case 'V':
+            return 5;
+
+            case 'X':
+            return 10;
+
+            case 'L':
+            return 50;
+
+            case 'C':
+            return 100;
+
+            case 'D':
+            return 500;
+
+            case 'M':
+            return 1000;
+
+            default:
+            return 0;
+        }
+    }
+
+    int romanToInt(string s) 
+    {
+        int n=s.size(),sum=0;
+
+        for(int i=0;i<n;i++)
+        {
+            if( val(s[i]) < val(s[i+1]) )
+            {
+                sum=sum+val(s[i+1])-val(s[i]);
+                ++i;
+            }
+
+            else
+            {
+                sum=sum+val(s[i]);
+            }
+        }
+
+        return sum;
+    }
+
+// NB
+
+/*
+Here, there's no segmentation fault or any exception thrown when i+1 is beyond the string length (in the if condition). 
+This is because [] operator does not perform bound checks, so compiles and runs successfully, while string.at(integer_index) does perform bound checks, compiling succesfully but throwing runtime exception. 
+
+EXAMPLE:
+string str="XIV";
+cout<<str[6]<<endl; // compiles and runs successfully
+cout<<str.at(6)<<endl; // compiles successfully but throws runtime exception
+*/
