@@ -1,7 +1,7 @@
-int i,d,q;
-
-    string oneTo9(int num)
+string oneTo9(int num)
     {
+        int i;
+
         string strcur="";
 
         if(num>=1 && num<=3)
@@ -29,10 +29,12 @@ int i,d,q;
 
     string tenTo99(int num)
     {
+        int i;
+
         string strcur="";
 
-        d=num%10;
-        q=num/10;
+        int d=num%10;
+        int q=num/10;
 
         // finding remDigit
         string remDigit=oneTo9(d);
@@ -69,10 +71,12 @@ int i,d,q;
 
     string hundredTo999(int num)
     {
+        int i;
+        
         string strcur="";
         
-        d=num%100;
-        q=num/100;
+        int d=num%100;
+        int q=num/100;
 
         // finding remDigit
         string remDigit=tenTo99(d);
@@ -111,10 +115,12 @@ int i,d,q;
 
     string thousandTo3999(int num)
     {
+        int i;
+
         string strcur="";
 
-        d=num%1000;
-        q=num/1000;
+        int d=num%1000;
+        int q=num/1000;
 
         // finding remDigit
         string remDigit=hundredTo999(d);
