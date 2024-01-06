@@ -1,4 +1,8 @@
 /*
+QUESTION LINK: https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/description/
+*/
+
+/*
  Here, the first function did not pass some test cases. The second did pass the known test cases (don't know about edge cases), but exceeded the time limit. The third passed the known test cases in CodeBlocks but not in the leetcode compiler (again, don't know about the edge cases).
 */
 
